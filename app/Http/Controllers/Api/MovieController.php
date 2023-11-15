@@ -16,18 +16,13 @@ class MovieController extends Controller
         return response()->json($movies);
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(MovieRequest $request)
     {
         $path = $request->picture_file_path->store('images', 'public');
         $movie = Movie::create([
             'name' => $request->name,
             'release_date' => $request->release_date,
-            'is_active' => $request->is_active,
+            'is_active' => $path,
             'picture_file_path' => $path,
             'minutes_length' => $request->minutes_length,
         ]);
@@ -40,11 +35,6 @@ class MovieController extends Controller
         //
     }
 
-    public function edit(string $id)
-    {
-        //
-    }
-
     public function update(MovieRequest $request, string $id)
     {
         //
@@ -52,6 +42,6 @@ class MovieController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        Movie::findOrFail($id)->delete();
     }
 }

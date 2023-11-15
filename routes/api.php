@@ -10,6 +10,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
 
     Route::post('movies', [MovieController::class, 'store']);
     Route::get('movies', [MovieController::class, 'index']);
+    Route::delete('movies/{id}', [MovieController::class, 'destroy']);
 
     Route::get('user', [AuthController::class, 'user']);
 
